@@ -32,13 +32,22 @@ fastlane/[scan](https://docs.fastlane.tools/actions/scan/)を実行する際に�
 - rubygemsで、[bundler - rubygems](https://github.com/rubygems/rubygems/tree/master/bundler)をインストールする。
 
 `-ruby 2.7.3` `-gem 3.2.28` `-bundlers 2.2.28` にインストールしたいソフトウェアバージョンを指定して、ターミナルで実行します。  
-この記事ではrubyは2.7の最新バージョンの2.7.3、rubygemsとbundlerは最新バージョンの3.2.28と2.2.28に指定しています。
+この記事ではrubyは2.7.3、rubygemsとbundlerは最新バージョンの3.2.28と2.2.28に指定しています。
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Tea-and-Coffee/fast-ruby-install/master/install.sh | bash -s -- --ruby 2.7.3 --gem 3.2.28 --bundlers 2.2.28
 ```
 
 2-3
+
+プロジェクト内で使用するrubyバージョンを指定するため、`.ruby-version`ファイルを作成してバージョンを記述します。
+
+```bash
+echo "2.7.3" > .ruby-version
+
+```
+
+2-4
 
 続いてbundlerの設定ファイルを作成します。  
 実行後に`Gemfile`というテキストファイルが作成されます。
@@ -47,7 +56,7 @@ curl -fsSL https://raw.githubusercontent.com/Tea-and-Coffee/fast-ruby-install/ma
 bundle init
 ```
 
-2-4
+2-5
 
 `Gemfile`をテキストとして開き、後述を参考に編集します
 この記事では現状の最終バージョンを指定しています。 詳細なバージョン指定方法については知りたい場合は [Bundler: gemfile](https://bundler.io/man/gemfile.5.html) を参照して下さい。
@@ -68,7 +77,7 @@ gem "cocoapods", "~> 1.11.2"
 gem "xcode-install", "~> 2.8"
 ```
 
-2-5
+2-6
 
 `Gemfile`の編集が済んだら、Gemfileに記載のソフトウェアをインストールするために実行します。
 
@@ -77,3 +86,14 @@ bundle install
 ```
 
 `vendor/bundle`配下にgems（fastlaneやその依存関係のあるソフトウェア）がインストールされますので、必要に応じて`.gitignore`に`vendor/`を追記します。
+
+3 fastlaneのセットアップ
+
+fastlaneの動作環境が整いましたので、fastlaneのセットアップを行います。
+
+3-1
+
+```bash
+bundle exec fastlane init
+
+```
