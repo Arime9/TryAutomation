@@ -18,6 +18,15 @@ platform :ios do
     ensure_xcode_version
   end
 
+  lane :test do |options|
+    scan(
+      project: "TryAutomation.xcodeproj",
+      scheme: "TryAutomation",
+      configuration: "Debug",
+      clean: true
+    )
+  end
+
   after_all do |lane|
   end
 

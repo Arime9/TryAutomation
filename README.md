@@ -1,10 +1,8 @@
-1
+1 プロジェクトにXCTestとXCUITestを追加する。
 
-fastlane/[scan](https://docs.fastlane.tools/actions/scan/)を実行する際に必要になるので、Xcode
- Projectを作成する際は`Include Tests`を選択します。
+fastlane/[scan](https://docs.fastlane.tools/actions/scan/)を実行する際に必要になるので、Xcodeプロジェクトを作成する際は`Include Tests`を選択します。
 
-既にProject作成済みの場合は、Targetの`Unit Testing Bundle`と`UI Testing Bundle`を追加します。  
-これらはXCTestとXCUITestに該当します。
+作成済みのプロジェクトの場合は、Targetの`Unit Testing Bundle`と`UI Testing Bundle`を追加します。  
 
 ![](./.assets/xcode_new_project.jpg)
 ![](./.assets/xcode_project_add_target_test.jpg)
@@ -155,7 +153,7 @@ platform :ios do
 end
 ```
 
-3-3
+4 Xcodeバージョンの確認をする
 
 fastlaneを実行する際にXcodeバージョンが正しいか確認してから実行したい場合は、`.xcode-version`ファイルを作成し、`before_all` blockにfastlane/[ensure_xcode_version](https://docs.fastlane.tools/actions/ensure_xcode_version/)を追記します。
 
@@ -175,4 +173,90 @@ echo "12.5.1" > .xcode-version
     ensure_xcode_version
   end
 
+```
+
+5 テストを実行する
+
+5-1
+
+テストを実行するには、fastlane/[scan](https://docs.fastlane.tools/actions/scan/)を用います。
+
+projectには.xcodeprojのファイルパス。schemeとconfigurationにはテスト実行時に使用している環境を指定します。  
+環境変数が不明な場合は`xcodebuild -list -json`を実行すると全出力されるので、その中から選ぶ様にします。  
+なおcleanにtrue指定すると、実行時にクリーンビルドになります。
+
+```ruby
+  lane :test do |options|
+    scan(
+      project: "TryAutomation.xcodeproj",
+      scheme: "TryAutomation",
+      configuration: "Debug",
+      clean: true
+    )
+  end
+```
+
+※ CocoaPodsを使用している等の理由で`*xcworkspace`ファイルがある場合は、"projectとxcodeproj"の部分が"workspaceとxcworkspace"に置き換わります。
+
+```ruby
+  lane :test do |options|
+    scan(
+      workspace: "TryAutomation.xcworkspace",
+      scheme: "TryAutomation",
+      configuration: "Debug",
+      clean: true
+    )
+  end
+```
+
+**`xcodebuild -list -json`の出力例：**
+
+```bash
+$ xcodebuild -list -json
+{
+  "project" : {
+    "configurations" : [
+      "Debug",
+      "Release"
+    ],
+    "name" : "TryAutomation",
+    "schemes" : [
+      "TryAutomation"
+    ],
+    "targets" : [
+      "TryAutomation",
+      "TryAutomationTests",
+      "TryAutomationUITests"
+    ]
+  }
+}
+```
+
+5-2
+
+schemeが共有されていない場合は、"Scheme > Manage schemes..."と進み、Sharedにチェックをします。
+
+![](./.assets/xcode_manage_schemes.jpg)
+
+5-3
+
+ここまででscanを実行する順が整いましたので、fastlaneを実行します。  
+途中実行したいlane番号の入力を求められるので、該当する数字を入力しEnterキーを投下します。
+
+```bash
+$ bundle exec fastlane
+[✔] 🚀 
+------------------------------
+--- Step: default_platform ---
+------------------------------
+Welcome to fastlane! Here's what your app is set up to do:
++--------+-----------+------------------------------+
+|              Available lanes to run               |
++--------+-----------+------------------------------+
+| Number | Lane Name | Description                  |
++--------+-----------+------------------------------+
+| 1      | ios test  |                              |
+| 0      | cancel    | No selection, exit fastlane! |
++--------+-----------+------------------------------+
+Which number would you like run?
 ```
