@@ -260,3 +260,28 @@ Welcome to fastlane! Here's what your app is set up to do:
 +--------+-----------+------------------------------+
 Which number would you like run?
 ```
+
+CompileやBuildの後、テストが実行され、"Test Results"にテスト結果が出力されます。  
+"fastlane summary"には今回実行したActionと実行時間の一覧が出力されます。
+
+```bash
++--------------------+---+
+|      Test Results      |
++--------------------+---+
+| Number of tests    | 4 |
+| Number of failures | 0 |
++--------------------+---+
+
+
++------+----------------------+-------------+
+|             fastlane summary              |
++------+----------------------+-------------+
+| Step | Action               | Time (in s) |
++------+----------------------+-------------+
+| 1    | default_platform     | 0           |
+| 2    | ensure_xcode_version | 1           |
+| 3    | scan                 | 122         |
++------+----------------------+-------------+
+
+fastlane.tools finished successfully 🎉
+```
