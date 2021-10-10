@@ -1,14 +1,14 @@
 //
-//  FastlaneExampleApp.swift
-//  FastlaneExample
+//  TryAutomationApp.swift
+//  TryAutomation
 //
-//  Created by arai on 2021/09/25.
+//  Created by arai on 2021/10/10.
 //
 
 import SwiftUI
 
 @main
-struct FastlaneExampleApp: App {
+struct TryAutomationApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

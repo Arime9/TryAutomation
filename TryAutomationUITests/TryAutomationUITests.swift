@@ -1,13 +1,13 @@
 //
-//  FastlaneExampleUITests.swift
-//  FastlaneExampleUITests
+//  TryAutomationUITests.swift
+//  TryAutomationUITests
 //
-//  Created by arai on 2021/09/25.
+//  Created by arai on 2021/10/10.
 //
 
 import XCTest
 
-class FastlaneExampleUITests: XCTestCase {
+class TryAutomationUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
