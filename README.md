@@ -118,3 +118,61 @@ Continue by pressing Enter
 ```
 
 最後まで実行が完了すると、`fastlane`配下に`Appfile`, `Fastfile`が生成されます。
+
+3-2
+
+手始めに`Fastfile`を開き、`before_all` block, `after_all` block, `error` blockを追加します。  
+レーンを実行した際に、それぞれレーン実行前・レーン実行後後・エラー発生時に呼ばれるblockになります。
+
+各blockの公式情報は[Fastfile - fastlane docs](https://docs.fastlane.tools/advanced/Fastfile/)になります。
+
+```ruby
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+default_platform(:ios)
+
+platform :ios do
+
+  before_all do |lane|
+  end
+
+  after_all do |lane|
+  end
+
+  error do |lane, exception|
+  end
+
+end
+```
+
+3-3
+
+fastlaneを実行する際にXcodeバージョンが正しいか確認してから実行したい場合は、`.xcode-version`ファイルを作成し、`before_all` blockにfastlane/[ensure_xcode_version](https://docs.fastlane.tools/actions/ensure_xcode_version/)を追記します。
+
+ensure_xcode_versionにはこれらの効果があるので追記することを強くおすすめします。
+
+- チームメンバー内で使用するXcodeバージョンを統一する。
+- プロダクト毎に違うバージョンを使用している場合に、バージョン切り替え忘れを防ぐ。
+- ローカルマシンとCIで使用しているバージョンが違う場合に検知出来る。
+
+```bash
+echo "12.5.1" > .xcode-version
+
+```
+
+```ruby
+  before_all do |lane|
+    ensure_xcode_version
+  end
+
+```
