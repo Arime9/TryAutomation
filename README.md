@@ -85,7 +85,7 @@ gem "xcode-install", "~> 2.8"
 bundle install
 ```
 
-`vendor/bundle`配下にgems（fastlaneやその依存関係のあるソフトウェア）がインストールされますので、必要に応じて`.gitignore`に`vendor/`を追記します。
+`vendor/bundle`配下にgem（fastlaneやその依存関係のあるRubyのプログラム）がインストールされますので、必要に応じて`.gitignore`に`vendor/`を追記します。
 
 3 fastlaneのセットアップ
 
@@ -93,7 +93,28 @@ fastlaneの動作環境が整いましたので、fastlaneのセットアップ�
 
 3-1
 
+fastlaneの初期ファイルを生成します。  
+bundleでインストールしたgemを実行するには、`bundle exec <gem> *`というシンタックスを用います。
+
 ```bash
 bundle exec fastlane init
 
 ```
+
+実行中の以下の様な質問には、"Manual setup"の`4`を入力し、Enterキーを投下します。
+
+```bash
+What would you like to use fastlane for?
+1. 📸  Automate screenshots
+2. 👩‍✈️  Automate beta distribution to TestFlight
+3. 🚀  Automate App Store distribution
+4. 🛠  Manual setup - manually setup your project to automate your tasks
+```
+
+その後も3回ほどEnterキーを求めれるので、Enterキーを投下します。
+
+```bash
+Continue by pressing Enter
+```
+
+最後まで実行が完了すると、`fastlane`配下に`Appfile`, `Fastfile`が生成されます。
