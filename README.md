@@ -27,9 +27,9 @@ fastlane/[scan](https://docs.fastlane.tools/actions/scan/)を実行する際に�
 
 - Homebrewで、[rbenv](https://github.com/rbenv/rbenv)と[rbenv/ruby-build](https://github.com/rbenv/ruby-build)をインストールする。  
 - rbenvで、[ruby](https://github.com/ruby/ruby)及び[rubygems](https://github.com/rubygems/rubygems)をインストールする。  
-- rubygemsで、[bundler - rubygems](https://github.com/rubygems/rubygems/tree/master/bundler)をインストールする。
+- rubygemsで、[bundler](https://github.com/rubygems/rubygems/tree/master/bundler)をインストールする。
 
-`-ruby 2.7.3` `-gem 3.2.28` `-bundlers 2.2.28` にインストールしたいソフトウェアバージョンを指定して、ターミナルで実行します。  
+`--ruby 2.7.3` `--gem 3.2.28` `--bundlers 2.2.28` にインストールしたいソフトウェアバージョンを指定して、ターミナルで実行します。  
 この記事ではrubyは2.7.3、rubygemsとbundlerは最新バージョンの3.2.28と2.2.28に指定しています。
 
 ```bash
@@ -56,8 +56,8 @@ bundle init
 
 2-5
 
-`Gemfile`をテキストとして開き、後述を参考に編集します
-この記事では現状の最終バージョンを指定しています。 詳細なバージョン指定方法については知りたい場合は [Bundler: gemfile](https://bundler.io/man/gemfile.5.html) を参照して下さい。
+`Gemfile`をテキストとして開き、後述を参考に編集します。この記事では現状の最終バージョンを指定しています。  
+詳細なバージョン指定方法については知りたい場合は [Bundler: gemfile](https://bundler.io/man/gemfile.5.html) を参照して下さい。
 
 ```
 source "https://rubygems.org"
@@ -120,7 +120,7 @@ Continue by pressing Enter
 3-2
 
 手始めに`Fastfile`を開き、`before_all` block, `after_all` block, `error` blockを追加します。  
-レーンを実行した際に、それぞれレーン実行前・レーン実行後後・エラー発生時に呼ばれるblockになります。
+レーンを実行した際にそれぞれ、レーン実行前・レーン実行後後・エラー発生時に呼ばれるblockになります。
 
 各blockの公式情報は[Fastfile - fastlane docs](https://docs.fastlane.tools/advanced/Fastfile/)になります。
 
@@ -182,7 +182,7 @@ echo "12.5.1" > .xcode-version
 テストを実行するには、fastlane/[scan](https://docs.fastlane.tools/actions/scan/)を用います。
 
 projectには.xcodeprojのファイルパス。schemeとconfigurationにはテスト実行時に使用している環境を指定します。  
-環境変数が不明な場合は`xcodebuild -list -json`を実行すると全出力されるので、その中から選ぶ様にします。  
+環境変数が不明な場合は`xcodebuild -list -json`を実行すると出力されるので、その中から選ぶ様にします。  
 なおcleanにtrue指定すると、実行時にクリーンビルドになります。
 
 ```ruby
@@ -234,14 +234,14 @@ $ xcodebuild -list -json
 
 5-2
 
-schemeが共有されていない場合は、"Scheme > Manage schemes..."と進み、Sharedにチェックをします。
+もしschemeが共有状態になっていない場合は、"Scheme > Manage schemes..."と進み、Sharedにチェックをします。
 
 ![](./.assets/xcode_manage_schemes.jpg)
 
 5-3
 
 ここまででscanを実行する順が整いましたので、fastlaneを実行します。  
-途中実行したいlane番号の入力を求められるので、該当する数字を入力しEnterキーを投下します。
+暫くすると本来実行したいlane番号の入力を求められるので、該当する数字を入力しEnterキーを投下します。
 
 ```bash
 $ bundle exec fastlane
