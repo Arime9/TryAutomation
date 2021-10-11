@@ -1,8 +1,9 @@
 1 プロジェクトにXCTestとXCUITestを追加する。
 
-fastlane/[scan](https://docs.fastlane.tools/actions/scan/)を実行する際に必要になるので、Xcodeプロジェクトを作成する際は`Include Tests`を選択します。
-
+Xcodeプロジェクトを作成する際は`Include Tests`を選択します。  
 作成済みのプロジェクトの場合は、Targetの`Unit Testing Bundle`と`UI Testing Bundle`を追加します。  
+
+これは第5章で話に触れる、fastlane/scanを実行する際に使用するテストになります。
 
 ![](./.assets/xcode_new_project.jpg)
 ![](./.assets/xcode_project_add_target_test.jpg)
@@ -176,6 +177,8 @@ echo "12.5.1" > .xcode-version
 ```
 
 5 テストを実行する
+
+ビルドが通り、テストが成功するかを自動化したいと思います。
 
 5-1
 
