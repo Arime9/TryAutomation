@@ -1,4 +1,4 @@
-### 1. プロジェクトにXCTestとXCUITestを追加する。
+### 1. プロジェクトにXCTestとXCUITestを追加する
 
 Xcodeプロジェクトを作成する際は`Include Tests`を選択します。  （画像上）
 作成済みのプロジェクトの場合は、Targetの`Unit Testing Bundle`と`UI Testing Bundle`を追加します。  （画像下）
@@ -8,7 +8,7 @@ Xcodeプロジェクトを作成する際は`Include Tests`を選択します。
 ![](./.assets/xcode_new_project.jpg)
 ![](./.assets/xcode_project_add_target_test.jpg)
 
-### 2. fastlaneの動作環境を整えるために各種ソフトウェアをインストールします。
+### 2. fastlaneの動作環境を整えるために各種ソフトウェアをインストールする
 
 [Setup - fastlane docs](https://docs.fastlane.tools/getting-started/ios/setup/) を参考にご自身で環境構築しても良いですが、この記事ではmacOSに標準でインストールしてあるソフトウェアに依存しない方法を極力選ぶながら説明します。
 
