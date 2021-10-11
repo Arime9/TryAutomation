@@ -1,4 +1,4 @@
-1 プロジェクトにXCTestとXCUITestを追加する。
+### 1. プロジェクトにXCTestとXCUITestを追加する。
 
 Xcodeプロジェクトを作成する際は`Include Tests`を選択します。  
 作成済みのプロジェクトの場合は、Targetの`Unit Testing Bundle`と`UI Testing Bundle`を追加します。  
@@ -8,11 +8,11 @@ Xcodeプロジェクトを作成する際は`Include Tests`を選択します。
 ![](./.assets/xcode_new_project.jpg)
 ![](./.assets/xcode_project_add_target_test.jpg)
 
-2 fastlaneの動作環境を整えるために各種ソフトウェアをインストールします。
+### 2. fastlaneの動作環境を整えるために各種ソフトウェアをインストールします。
 
 [Setup - fastlane docs](https://docs.fastlane.tools/getting-started/ios/setup/) を参考にご自身で環境構築しても良いですが、この記事ではPCの環境を極力汚さない方法を選びながら説明します。
 
-2-1
+2-1.
 
 [Homebrew](https://brew.sh/index_ja) のインストールがまだの場合は、まずこのスクリプトをターミナルで実行します。
 
@@ -20,7 +20,7 @@ Xcodeプロジェクトを作成する際は`Include Tests`を選択します。
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-2-2
+2-2.
 
 本来は後述の手順を踏んで各種ソフトウェアをインストールする必要があるのですが、この記事では [fast-ruby-install](https://github.com/Tea-and-Coffee/fast-ruby-install) のスクリプトを用いてまとめてインストールと環境構築を行います。
 
@@ -37,7 +37,7 @@ Xcodeプロジェクトを作成する際は`Include Tests`を選択します。
 curl -fsSL https://raw.githubusercontent.com/Tea-and-Coffee/fast-ruby-install/master/install.sh | bash -s -- --ruby 2.7.3 --gem 3.2.28 --bundlers 2.2.28
 ```
 
-2-3
+2-3.
 
 プロジェクト内で使用するrubyバージョンを指定するため、`.ruby-version`ファイルを作成してバージョンを記述します。
 
@@ -46,7 +46,7 @@ echo "2.7.3" > .ruby-version
 
 ```
 
-2-4
+2-4.
 
 続いてbundlerの設定ファイルを作成します。  
 実行後に`Gemfile`というテキストファイルが作成されます。
@@ -55,7 +55,7 @@ echo "2.7.3" > .ruby-version
 bundle init
 ```
 
-2-5
+2-5.
 
 `Gemfile`をテキストとして開き、後述を参考に編集します。この記事では現状の最終バージョンを指定しています。  
 詳細なバージョン指定方法については知りたい場合は [Bundler: gemfile](https://bundler.io/man/gemfile.5.html) を参照して下さい。
@@ -76,7 +76,7 @@ gem "cocoapods", "~> 1.11.2"
 gem "xcode-install", "~> 2.8"
 ```
 
-2-6
+2-6.
 
 `Gemfile`の編集が済んだら、Gemfileに記載のソフトウェアをインストールするために実行します。
 
@@ -86,11 +86,11 @@ bundle install
 
 `vendor/bundle`配下にgem（fastlaneやその依存関係のあるRubyのプログラム）がインストールされますので、必要に応じて`.gitignore`に`vendor/`を追記します。
 
-3 fastlaneのセットアップ
+### 3. fastlaneのセットアップ
 
 fastlaneの動作環境が整いましたので、fastlaneのセットアップを行います。
 
-3-1
+3-1.
 
 fastlaneの初期ファイルを生成します。  
 bundleでインストールしたgemを実行するには、`bundle exec <gem> *`というシンタックスを用います。
@@ -118,7 +118,7 @@ Continue by pressing Enter
 
 最後まで実行が完了すると、`fastlane`配下に`Appfile`, `Fastfile`が生成されます。
 
-3-2
+3-2.
 
 手始めに`Fastfile`を開き、`before_all` block, `after_all` block, `error` blockを追加します。  
 レーンを実行した際にそれぞれ、レーン実行前・レーン実行後後・エラー発生時に呼ばれるblockになります。
@@ -154,7 +154,7 @@ platform :ios do
 end
 ```
 
-4 Xcodeバージョンの確認をする
+### 4. Xcodeバージョンの確認をする
 
 fastlaneを実行する際にXcodeバージョンが正しいか確認してから実行したい場合は、`.xcode-version`ファイルを作成し、`before_all` blockにfastlane/[ensure_xcode_version](https://docs.fastlane.tools/actions/ensure_xcode_version/)を追記します。
 
@@ -176,11 +176,11 @@ echo "12.5.1" > .xcode-version
 
 ```
 
-5 テストを実行する
+### 5. テストを実行する
 
 ビルドが通り、テストが成功するかを自動化したいと思います。
 
-5-1
+5-1.
 
 テストを実行するには、fastlane/[scan](https://docs.fastlane.tools/actions/scan/)を用います。
 
@@ -235,13 +235,13 @@ $ xcodebuild -list -json
 }
 ```
 
-5-2
+5-2.
 
 もしschemeが共有状態になっていない場合は、"Scheme > Manage schemes..."と進み、Sharedにチェックをします。
 
 ![](./.assets/xcode_manage_schemes.jpg)
 
-5-3
+5-3.
 
 ここまででscanを実行する順が整いましたので、fastlaneを実行します。  
 暫くすると本来実行したいlane番号の入力を求められるので、該当する数字を入力しEnterキーを投下します。
