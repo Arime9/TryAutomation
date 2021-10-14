@@ -1,7 +1,7 @@
 ### 1. プロジェクトにXCTestとXCUITestを追加する
 
-Xcodeプロジェクトを作成する際は`Include Tests`を選択します。  （画像上）
-作成済みのプロジェクトの場合は、Targetの`Unit Testing Bundle`と`UI Testing Bundle`を追加します。  （画像下）
+Xcodeプロジェクトを作成する際は`Include Tests`を選択します。（画像上）  
+作成済みのプロジェクトの場合は、Targetの`Unit Testing Bundle`と`UI Testing Bundle`を追加します。（画像下）  
 
 この章で追加したターゲットは、後の第5章「テストを実行する」で使用します。
 
@@ -43,7 +43,6 @@ curl -fsSL https://raw.githubusercontent.com/Tea-and-Coffee/fast-ruby-install/ma
 
 ```bash
 echo "2.7.3" > .ruby-version
-
 ```
 
 2-4.
@@ -97,7 +96,6 @@ bundleでインストールしたgemを実行するには、`bundle exec <gem> *
 
 ```bash
 bundle exec fastlane init
-
 ```
 
 実行中の以下の様な質問には、"Manual setup"の`4`を入力し、Enterキーを投下します。
@@ -166,14 +164,12 @@ ensure_xcode_versionにはこれらの効果があるので追記することを
 
 ```bash
 echo "12.5.1" > .xcode-version
-
 ```
 
 ```ruby
   before_all do |lane|
     ensure_xcode_version
   end
-
 ```
 
 ### 5. テストを実行する
